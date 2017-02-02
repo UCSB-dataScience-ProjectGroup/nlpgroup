@@ -2,22 +2,26 @@ import http.client
 import json
 
 
-conn = http.client.HTTPConnection("api.nytimes.com")
-conn.request("GET", "//svc/archive/v1/1851/12.json?api-key=49b5f91ad3b049c2974dc4b5c95be8c1")
-r = conn.getresponse()
-print(r.status, r.reason)
 
-#print(type(r.read()))
 
-#d = r.read()
+class Nytapi:
 
-#print(d.decode("utf-8"))
+	def __init__(self):
+		self.conn = http.client.HTTPConnection("api.nytimes.com")
+
+	def req(self, year=1851, month=12):
+		self.conn.request("GET", "//svc/archive/v1/" + str(year) + \
+		"/" + str(month) + ".json?api-key=49b5f91ad3b049c2974dc4b5c95be8c1")
+		r = self.conn.getresponse()
+		return json.loads(r.read().decode("ascii"))
 
 #d = json.loads(r.read().decode("ascii"))
 
-d = json.loads(r.read().decode("ascii"))
 
+if __name__ == "__main__":
+	nytapi = Nytapi()
 
-#print(d.keys())
-for doc in d['response']['docs']:
-	print(doc['headline']['main'])
+	d = nytapi.req(1851, 12)
+
+	for doc in d['response']['docs']:
+		print(doc['headline']['main'])
