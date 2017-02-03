@@ -6,7 +6,7 @@ import http.client
 import json
 
 conn = http.client.HTTPConnection('api.nytimes.com', 80)
-conn.request("GET", "/svc/archive/v1/1851/12.json?api-key=49b5f91ad3b049c2974dc4b5c95be8c1")
+conn.request("GET", "/svc/archive/v1/1851/12.json?api-key=INSERT API KEY")
 r1 = conn.getresponse()
 print(r1.status, r1.reason)
 
