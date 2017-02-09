@@ -8,7 +8,7 @@ class NYT:
 
 	def __init__(self):
 		self.conn = http.client.HTTPConnection("api.nytimes.com")
-		with open('config.txt','r') as f:
+		with open('config.txt','r') as f: #is config.txt a file that needs to be downloaded?
 			self.cfg = json.load(f)
 
 	def get_archive(self, year=1851, month=12):
