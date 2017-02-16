@@ -47,6 +47,12 @@ class NYT:
 		return json.loads(r.read().decode("ascii"))
 	
 
+	def archives_local_request(self, year, month):
+		
+
+
+
+
 if __name__ == "__main__":
 	nytapi = NYT()
 
