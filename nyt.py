@@ -26,7 +26,12 @@ class NYT:
 		## 	is requested again then just use the stored data. It
 		##  would be reasonable to make a new file for each 
 		##  year/month combination.
+	
 		json_string = self.archives_api_request(year,month)
+		
+		with open('data/yr{0}mo{1}.json'.format(year, month) ,'w') as the_file:
+			the_file.write(json_string)
+
 		return json.loads(json_string)
 
 
@@ -46,11 +51,6 @@ class NYT:
 			raise(Exception('Error making request to nyt.com.'))
 		
 		return r.read().decode("ascii")
-	
-
-	def archives_local_request(self, year, month):
-		
-
 
 
 
