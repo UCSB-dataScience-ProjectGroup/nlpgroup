@@ -2,7 +2,7 @@
 # 1: make sure gensim is installed; "conda install gensim"
 # 2: check out this page: https://radimrehurek.com/gensim/models/word2vec.html
 
-
+import pprint
 import gensim
 import numpy as np
 
@@ -13,7 +13,9 @@ if __name__ == '__main__':
 		['f','g','h','i','j','k','l'],
 		['f','g','c','i','m','n','o']
 	]
-
+	print('Pretend these are test sentences:')
+	pprint.pprint(sentences)
+	print()
 
 	# Word2Vec Function
 	# sentences: list of sentences (as lists - tokenized using nltk)
