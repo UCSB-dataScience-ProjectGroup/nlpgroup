@@ -22,7 +22,7 @@ def getscores(docs):
 
 	# make a list of score dictionaries
 	wordlist = list(vectorizer.get_feature_names())
-	print(wordlist)
+	#print(wordlist)
 	tfidf_lookup = tfidf.toarray()
 	scores = list()
 	dontuse = ['.','a','i','?',"'s","'"] + nltk.corpus.stopwords.words('english')
