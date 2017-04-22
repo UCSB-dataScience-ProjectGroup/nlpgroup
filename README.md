@@ -19,6 +19,15 @@ using python with the nltk and wordcloud libraries.
 * recessions through the years: what makes each 50-year period of recessions unique?
 * expansions through the years: what makes each 50-year period of expansions unique?
 
+# Presentation
+
+* introduction - research questions
+* explain data (nytapi)
+* explain methods (python api, tfidf, wordcloud)
+* show results 1
+* show results 2
+
+
 # Resources
 
 ## Wheel Repository
