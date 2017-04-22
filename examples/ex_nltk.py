@@ -6,42 +6,6 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.feature_extraction.text import TfidfTransformer
 from sklearn.feature_extraction.text import CountVectorizer
 
-def getscores(docs):
-
-        vectorizer = CountVectorizer(min_df=1)
-	transformer = TfidfTransformer(smooth_idf=False)
-
-        X = vectorizer.fit_transform(docs)
-	#print(X.toarray())
-
-        #print(vectorizer.get_feature_names())
-        #print()
-
-
-        tfidf = transformer.fit_transform(X)
-        print(tfidf.toarray())
-
-        # make a list of dicts
-        wordlist = list(vectorizer.get_feature_names())
-        print(wordlist)
-        tfidf_lookup = tfidf.toarray()
-        scores = list()
-        dontuse = ['.','a','i','?']
-        for i in range(len(docs)):
-                docscores = dict()
-                for word in nltk.word_tokenize(docs[i]):
-                        if word not in dontuse:
-                                wordind = wordlist.index(word.lower())
-                                score = tfidf_lookup[i][wordind]
-                                docscores[word] = score
-                scores.append(docscores)
-
-	return scores
-	
-
-
-
-
 
 if __name__ == "__main__":
 	sometext = "a b c d e f g h a b c h i j k l m a b"
@@ -78,10 +42,10 @@ if __name__ == "__main__":
 
 
 
-        from sklearn.feature_extraction.text import CountVectorizer
+	from sklearn.feature_extraction.text import CountVectorizer
 
-        vectorizer = CountVectorizer(min_df=1)
-        print(vectorizer)
+	vectorizer = CountVectorizer(min_df=1)
+	print(vectorizer)
         print()
         X = vectorizer.fit_transform(docs)
         print(X)
