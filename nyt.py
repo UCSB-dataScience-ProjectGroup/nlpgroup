@@ -1,6 +1,7 @@
 import http.client
 import json
 import os
+from nltk import word_tokenize
 
 
 
@@ -59,6 +60,80 @@ class NYT:
 			raise(Exception('Error making request to nyt.com.'))
 		
 		return r.read().decode("ascii")
+
+
+	def get_headline_list(self, *args):
+		
+	##	  -Function which returns a list comprised of all the headlines in list form 
+	##	   of an archive(from a given year, month)
+
+		d = self.get_archive(*args)
+
+		headlineList = []
+
+		for doc in d['response']['docs']:
+			if doc['headline']['main'][:5] == 'Front':
+				pass
+			elif doc['headline']['main'][:7] == 'Article':
+				pass
+			else:
+				headlineList.append(word_tokenize(doc['headline']['main']))
+		
+		return headlineList
+
+
+	def get_year_headline_list(self, year = 1853):
+		
+	##	  -Function which returns a list comprised of all of the headline
+                ##               lists of the archives from a given year.
+
+		yearHeadlineList = []
+
+		for month in range(1, 13):
+			yearHeadlineList.append(self.get_headline_list(year, month))
+
+		return yearHeadlineList
+
+
+	def get_year_range_headline_list(self, startYear = 1853, endYear = 1862):
+		
+	##	  -Function which returns a list comprised of all of the year headline lists 
+	##	   of the archives from a given range of years.
+		
+		yearRangeHeadlineList = []
+		
+		for year in range(startYear, endYear + 1):
+			yearRangeHeadlineList.append(self.get_year_headline_list(year))
+
+		return yearRangeHeadlineList
+
+
+	def get_time_period_headline_list(self, startYear = 1990, endYear = 1999, \
+		  startMonth = 1, endMonth = 12):
+
+	##	  -Function which returns a list comprised of all of the year headline lists 
+	##	   of the archives from a given range of years, starting and ending at specific
+                ##               months.
+
+		print("Compiling List of NYT headline Year Lists from " + str(startMonth) + ", " \
+		  + str(startYear) + " to " + str(endMonth) + ", " + str(endYear) + "...")
+
+		timePeriodHeadlineList = []
+		beginYearList = []
+		endYearList = []
+
+		for month in range(startMonth, 13):
+			beginYearList.append(self.get_headline_list(startYear, month))
+		timePeriodHeadlineList.append(beginYearList)
+		
+		for yearList in self.get_year_range_headline_list(startYear + 1, endYear - 1):
+			timePeriodHeadlineList.append(yearList)
+	
+		for month in range(1, endMonth + 1):
+			endYearList.append(self.get_headline_list(endYear, month))
+		timePeriodHeadlineList.append(endYearList)
+
+		return timePeriodHeadlineList
 	
 
 if __name__ == "__main__":
@@ -73,7 +148,7 @@ if __name__ == "__main__":
 
 	# initiate nytapi library
 	nytapi = NYT()
-	
+
 	# make a request to get the archive
 	d = nytapi.get_archive(year=yr, month=mo)
 
@@ -84,3 +159,4 @@ if __name__ == "__main__":
 		if i > 10:
 			break
 		i += 1
+
