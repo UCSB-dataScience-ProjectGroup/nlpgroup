@@ -13,6 +13,19 @@ decades. The important concepts from a decade will be
 visualized using word clouds. This project will be built
 using python with the nltk and wordcloud libraries.
 
+# Analysis
+
+* recessions vs expansion periods: what are significant words for each across all 150 years?
+* recessions through the years: what makes each 50-year period of recessions unique?
+* expansions through the years: what makes each 50-year period of expansions unique?
+
+# Presentation
+
+* introduction - research questions
+* explain data (nytapi)
+* explain methods (python api, tfidf, wordcloud)
+* show results 1
+* show results 2
 
 
 # Resources
