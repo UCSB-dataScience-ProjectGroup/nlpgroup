@@ -14,6 +14,17 @@ def readf(fname):
 		r = f.read().decode('utf-8', errors='replace')
 	return r
 
+datafiles = [
+	('e','headlinesFromExpansion1850to1900'),
+	('e','headlinesFromExpansion1900to1950'),
+	('e','headlinesFromExpansion1950to2000'),
+	('r','headlinesFromRecession1850to1900'),
+	('r','headlinesFromRecession1900to1950'),
+	('r','headlinesFromRecession1950to2000'),
+]
+
+
+
 if __name__ == '__main__':
 	mypath = 'data/'
 
@@ -23,7 +34,11 @@ if __name__ == '__main__':
 	# use each month as a doc
 	#yrz = [(1853,12),(1853,11),(1853,10)]
 	#docs = [' '.join([doc['headline']['main'] for doc in nytapi.get_archive(*yrmo)['response']['docs']]) for yrmo in yrz]
-	files = [str(f) for f in listdir(mypath) if isfile(join(mypath, str(f))) and f[0] != '.']
+	#files = [str(f) for f in listdir(mypath) if isfile(join(mypath, str(f))) and f[0] != '.']
+	#files = [df[1] for df in datafiles if df[0] == 'e']
+	#files = [df[1] for df in datafiles if df[0] == 'r']
+	files = [mypath + df[1] + '.txt' for df in datafiles]
+
 	#print(listdir(mypath))
 	docs = [readf(join(mypath,fname)) for fname in files]
 
