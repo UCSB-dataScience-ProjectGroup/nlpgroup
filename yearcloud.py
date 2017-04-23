@@ -40,7 +40,7 @@ if __name__ == '__main__':
 	files = [mypath + df[1] + '.txt' for df in datafiles]
 
 	#print(listdir(mypath))
-	docs = [readf(join(mypath,fname)) for fname in files]
+	docs = [readf(fname) for fname in files]
 
 	# get tfidf scores from each doc
 	scores = tfidflib.getscores(docs)
